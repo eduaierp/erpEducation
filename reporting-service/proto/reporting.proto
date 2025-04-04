@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package reporting;
+
+service ReportingService {
+    rpc GenerateReport (GenerateReportRequest) returns (ReportResponse);
+    rpc GetReport (GetReportRequest) returns (ReportResponse);
+    rpc ListReports (ListReportsRequest) returns (ListReportsResponse);
+}
+
+message Report {
+    int32 id = 1;
+    string title = 2;
+    string content = 3;
+    string created_at = 4;
+}
+
+message GenerateReportRequest {
+    string title = 1;
+    string content = 2;
+    string created_at = 3;
+}
+
+message GetReportRequest {
+    int32 id = 1;
+}
+
+message ReportResponse {
+    Report report = 1;
+}
+
+message ListReportsRequest {}
+
+message ListReportsResponse {
+    repeated Report reports = 1;
+}

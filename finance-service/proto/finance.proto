@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package finance;
+
+service FinanceService {
+    rpc CreateTransaction (CreateTransactionRequest) returns (TransactionResponse);
+    rpc GetTransaction (GetTransactionRequest) returns (TransactionResponse);
+    rpc ListTransactions (ListTransactionsRequest) returns (ListTransactionsResponse);
+}
+
+message Transaction {
+    int32 id = 1;
+    string type = 2;
+    float amount = 3;
+    string date = 4;
+    string description = 5;
+}
+
+message CreateTransactionRequest {
+    string type = 1;
+    float amount = 2;
+    string date = 3;
+    string description = 4;
+}
+
+message GetTransactionRequest {
+    int32 id = 1;
+}
+
+message TransactionResponse {
+    Transaction transaction = 1;
+}
+
+message ListTransactionsRequest {}
+
+message ListTransactionsResponse {
+    repeated Transaction transactions = 1;
+}

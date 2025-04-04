@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package exam;
+
+service ExamService {
+    rpc CreateExam (CreateExamRequest) returns (ExamResponse);
+    rpc GetExam (GetExamRequest) returns (ExamResponse);
+    rpc ListExams (ListExamsRequest) returns (ListExamsResponse);
+}
+
+message Exam {
+    int32 id = 1;
+    string subject = 2;
+    string date = 3;
+    string type = 4;
+}
+
+message CreateExamRequest {
+    string subject = 1;
+    string date = 2;
+    string type = 3;
+}
+
+message GetExamRequest {
+    int32 id = 1;
+}
+
+message ExamResponse {
+    Exam exam = 1;
+}
+
+message ListExamsRequest {}
+
+message ListExamsResponse {
+    repeated Exam exams = 1;
+}

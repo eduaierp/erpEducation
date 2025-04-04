@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package hr;
+
+service HRService {
+    rpc AddEmployee (AddEmployeeRequest) returns (EmployeeResponse);
+    rpc GetEmployee (GetEmployeeRequest) returns (EmployeeResponse);
+    rpc ListEmployees (ListEmployeesRequest) returns (ListEmployeesResponse);
+}
+
+message Employee {
+    int32 id = 1;
+    string name = 2;
+    string department = 3;
+    string role = 4;
+    string doj = 5;
+}
+
+message AddEmployeeRequest {
+    string name = 1;
+    string department = 2;
+    string role = 3;
+    string doj = 4;
+}
+
+message GetEmployeeRequest {
+    int32 id = 1;
+}
+
+message EmployeeResponse {
+    Employee employee = 1;
+}
+
+message ListEmployeesRequest {}
+
+message ListEmployeesResponse {
+    repeated Employee employees = 1;
+}

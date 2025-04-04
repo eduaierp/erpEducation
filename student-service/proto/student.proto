@@ -1,0 +1,54 @@
+
+syntax = "proto3";
+
+package student;
+
+service StudentService {
+    rpc CreateStudent (CreateStudentRequest) returns (StudentResponse);
+    rpc GetStudent (GetStudentRequest) returns (StudentResponse);
+    rpc UpdateStudent (UpdateStudentRequest) returns (StudentResponse);
+    rpc DeleteStudent (DeleteStudentRequest) returns (DeleteStudentResponse);
+    rpc ListStudents (ListStudentsRequest) returns (ListStudentsResponse);
+}
+
+message Student {
+    int32 id = 1;
+    string name = 2;
+    string email = 3;
+    string course = 4;
+}
+
+message CreateStudentRequest {
+    string name = 1;
+    string email = 2;
+    string course = 3;
+}
+
+message GetStudentRequest {
+    int32 id = 1;
+}
+
+message UpdateStudentRequest {
+    int32 id = 1;
+    string name = 2;
+    string email = 3;
+    string course = 4;
+}
+
+message DeleteStudentRequest {
+    int32 id = 1;
+}
+
+message DeleteStudentResponse {
+    string message = 1;
+}
+
+message StudentResponse {
+    Student student = 1;
+}
+
+message ListStudentsRequest {}
+
+message ListStudentsResponse {
+    repeated Student students = 1;
+}

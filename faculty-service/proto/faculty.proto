@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package faculty;
+
+service FacultyService {
+    rpc CreateFaculty (CreateFacultyRequest) returns (FacultyResponse);
+    rpc GetFaculty (GetFacultyRequest) returns (FacultyResponse);
+    rpc UpdateFaculty (UpdateFacultyRequest) returns (FacultyResponse);
+    rpc DeleteFaculty (DeleteFacultyRequest) returns (DeleteFacultyResponse);
+    rpc ListFaculties (ListFacultiesRequest) returns (ListFacultiesResponse);
+}
+
+message Faculty {
+    int32 id = 1;
+    string name = 2;
+    string email = 3;
+    string department = 4;
+    string designation = 5;
+}
+
+message CreateFacultyRequest {
+    string name = 1;
+    string email = 2;
+    string department = 3;
+    string designation = 4;
+}
+
+message GetFacultyRequest {
+    int32 id = 1;
+}
+
+message UpdateFacultyRequest {
+    int32 id = 1;
+    string name = 2;
+    string email = 3;
+    string department = 4;
+    string designation = 5;
+}
+
+message DeleteFacultyRequest {
+    int32 id = 1;
+}
+
+message DeleteFacultyResponse {
+    string message = 1;
+}
+
+message FacultyResponse {
+    Faculty faculty = 1;
+}
+
+message ListFacultiesRequest {}
+
+message ListFacultiesResponse {
+    repeated Faculty faculties = 1;
+}

@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package communication;
+
+service CommunicationService {
+    rpc SendMessage (SendMessageRequest) returns (MessageResponse);
+    rpc GetMessage (GetMessageRequest) returns (MessageResponse);
+    rpc ListMessages (ListMessagesRequest) returns (ListMessagesResponse);
+}
+
+message Message {
+    int32 id = 1;
+    string to = 2;
+    string subject = 3;
+    string body = 4;
+    string sent_at = 5;
+}
+
+message SendMessageRequest {
+    string to = 1;
+    string subject = 2;
+    string body = 3;
+    string sent_at = 4;
+}
+
+message GetMessageRequest {
+    int32 id = 1;
+}
+
+message MessageResponse {
+    Message message = 1;
+}
+
+message ListMessagesRequest {}
+
+message ListMessagesResponse {
+    repeated Message messages = 1;
+}
