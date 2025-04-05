@@ -1,24 +1,28 @@
 package handler
 
 import (
-	pb "auth-service/proto"
+	"auth-service/proto"
 	"auth-service/repository"
 	"auth-service/utils"
 	"context"
 	"errors"
+
+	"golang.org/x/crypto/bcrypt"
 )
 
 type AuthHandler struct {
 	Repo *repository.UserRepository
+	proto.UnimplementedAuthServiceServer
 }
 
-func (h *AuthHandler) Login(ctx context.Context, req *pb.LoginRequest) (*pb.LoginResponse, error) {
+func (h *AuthHandler) Login(ctx context.Context, req *proto.LoginRequest) (*proto.LoginResponse, error) {
 	user, err := h.Repo.GetByUsername(req.Username)
 	if err != nil {
 		return nil, errors.New("invalid credentials")
 	}
 
-	if req.Password != user.Password {
+	err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(req.Password))
+	if err != nil {
 		return nil, errors.New("invalid credentials")
 	}
 
@@ -27,7 +31,7 @@ func (h *AuthHandler) Login(ctx context.Context, req *pb.LoginRequest) (*pb.Logi
 		return nil, err
 	}
 
-	return &pb.LoginResponse{
+	return &proto.LoginResponse{
 		Token: token,
 		Role:  user.Role,
 	}, nil

@@ -1,25 +1,24 @@
 package server
 
 import (
+	"auth-service/proto"
 	"log"
 	"net"
-
-	pb "auth-service/proto"
 
 	"google.golang.org/grpc"
 )
 
-func StartGRPCServer(h pb.AuthServiceServer) {
-	lis, err := net.Listen("tcp", ":50061")
+func StartGRPCServer(handler proto.AuthServiceServer) {
+	listener, err := net.Listen("tcp", ":50061")
 	if err != nil {
-		log.Fatalf("Failed to listen: %v", err)
+		log.Fatalf("❌ Failed to listen: %v", err)
 	}
 
 	grpcServer := grpc.NewServer()
-	pb.RegisterAuthServiceServer(grpcServer, h)
+	proto.RegisterAuthServiceServer(grpcServer, handler)
 
-	log.Println("✅ Auth Service running on port 50061...")
-	if err := grpcServer.Serve(lis); err != nil {
-		log.Fatalf("Failed to serve: %v", err)
+	log.Println("✅ Auth Service is running on port 50061...")
+	if err := grpcServer.Serve(listener); err != nil {
+		log.Fatalf("❌ Failed to serve: %v", err)
 	}
 }
