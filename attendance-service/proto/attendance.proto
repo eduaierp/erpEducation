@@ -1,38 +1,39 @@
 syntax = "proto3";
 
 package attendance;
+option go_package = "./proto";
 
 service AttendanceService {
-    rpc MarkAttendance (MarkAttendanceRequest) returns (AttendanceResponse);
-    rpc GetAttendance (GetAttendanceRequest) returns (AttendanceResponse);
-    rpc ListAttendance (ListAttendanceRequest) returns (ListAttendanceResponse);
+	rpc MarkAttendance (MarkAttendanceRequest) returns (AttendanceResponse);
+	rpc GetAttendance (GetAttendanceRequest) returns (AttendanceResponse);
+	rpc ListAttendance (ListAttendanceRequest) returns (ListAttendanceResponse);
 }
 
 message Attendance {
-    int32 id = 1;
-    int32 student_id = 2;
-    string date = 3;
-    string status = 4; // Present / Absent / Leave
+	int32 id = 1;
+	int32 student_id = 2;
+	string date = 3;
+	string status = 4; // Present / Absent / Leave
 }
 
 message MarkAttendanceRequest {
-    int32 student_id = 1;
-    string date = 2;
-    string status = 3;
+	int32 student_id = 1;
+	string date = 2;
+	string status = 3;
 }
 
 message GetAttendanceRequest {
-    int32 id = 1;
+	int32 id = 1;
 }
 
 message AttendanceResponse {
-    Attendance attendance = 1;
+	Attendance attendance = 1;
 }
 
 message ListAttendanceRequest {
-    int32 student_id = 1;
+	int32 student_id = 1;
 }
 
 message ListAttendanceResponse {
-    repeated Attendance records = 1;
+	repeated Attendance records = 1;
 }

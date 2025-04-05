@@ -12,7 +12,7 @@ import (
 func StartGRPCServer(h pb.AttendanceServiceServer) {
 	lis, err := net.Listen("tcp", ":50054")
 	if err != nil {
-		log.Fatalf("Failed to listen: %v", err)
+		log.Fatalf("❌ Failed to listen: %v", err)
 	}
 
 	grpcServer := grpc.NewServer()
@@ -20,6 +20,6 @@ func StartGRPCServer(h pb.AttendanceServiceServer) {
 
 	log.Println("✅ Attendance Service running on port 50054...")
 	if err := grpcServer.Serve(lis); err != nil {
-		log.Fatalf("Failed to serve: %v", err)
+		log.Fatalf("❌ Failed to serve: %v", err)
 	}
 }
