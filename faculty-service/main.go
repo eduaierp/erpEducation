@@ -10,12 +10,11 @@ import (
 )
 
 func main() {
-	connStr := "user=postgres dbname=erp sslmode=disable password=postgres"
+	connStr := "user=ravikigf dbname=eduaierp sslmode=disable password=root"
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {
 		panic(err)
 	}
-
 	repo := &repository.FacultyRepository{DB: db}
 	h := &handler.FacultyHandler{Repo: repo}
 	server.StartGRPCServer(h)

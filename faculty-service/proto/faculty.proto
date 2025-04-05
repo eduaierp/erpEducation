@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 package faculty;
+option go_package = "./proto";
 
 service FacultyService {
     rpc CreateFaculty (CreateFacultyRequest) returns (FacultyResponse);
