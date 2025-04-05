@@ -10,7 +10,8 @@ import (
 )
 
 func main() {
-	db, err := sql.Open("postgres", "user=postgres dbname=erp sslmode=disable password=postgres")
+	connStr := "user=ravikigf dbname=eduaierp sslmode=disable password=root"
+	db, err := sql.Open("postgres", connStr)
 	if err != nil {
 		panic(err)
 	}

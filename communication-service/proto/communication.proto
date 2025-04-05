@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package communication;
-
+option go_package = "./proto";
 service CommunicationService {
     rpc SendMessage (SendMessageRequest) returns (MessageResponse);
     rpc GetMessage (GetMessageRequest) returns (MessageResponse);
