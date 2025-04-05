@@ -2,6 +2,7 @@
 syntax = "proto3";
 
 package academic;
+option go_package = "./proto";
 
 service AcademicService {
     rpc CreateProgram (CreateProgramRequest) returns (ProgramResponse);

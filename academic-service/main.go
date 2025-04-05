@@ -1,21 +1,22 @@
 package main
 
 import (
-    "database/sql"
-    _ "github.com/lib/pq"
-    "academic-service/repository"
-    "academic-service/handler"
-    "academic-service/server"
+	"academic-service/handler"
+	"academic-service/repository"
+	"academic-service/server"
+	"database/sql"
+
+	_ "github.com/lib/pq"
 )
 
 func main() {
-    connStr := "user=postgres dbname=erp sslmode=disable password=postgres"
-    db, err := sql.Open("postgres", connStr)
-    if err != nil {
-        panic(err)
-    }
+	connStr := "user=ravikigf dbname=eduaierp sslmode=disable password=root"
+	db, err := sql.Open("postgres", connStr)
+	if err != nil {
+		panic(err)
+	}
 
-    repo := &repository.AcademicRepository{DB: db}
-    h := &handler.AcademicHandler{Repo: repo}
-    server.StartGRPCServer(h)
+	repo := &repository.AcademicRepository{DB: db}
+	h := &handler.AcademicHandler{Repo: repo}
+	server.StartGRPCServer(h)
 }
