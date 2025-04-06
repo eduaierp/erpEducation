@@ -1,7 +1,7 @@
-
 syntax = "proto3";
 
 package student;
+option go_package = "./proto";
 
 service StudentService {
     rpc CreateStudent (CreateStudentRequest) returns (StudentResponse);
