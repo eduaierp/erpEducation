@@ -1,20 +1,22 @@
 package main
 
 import (
-    "database/sql"
-    _ "github.com/lib/pq"
-    "hr-service/repository"
-    "hr-service/handler"
-    "hr-service/server"
+	"database/sql"
+	"hr-service/handler"
+	"hr-service/repository"
+	"hr-service/server"
+
+	_ "github.com/lib/pq"
 )
 
 func main() {
-    db, err := sql.Open("postgres", "user=postgres dbname=erp sslmode=disable password=postgres")
-    if err != nil {
-        panic(err)
-    }
+	connStr := "user=ravikigf dbname=eduaierp sslmode=disable password=root"
+	db, err := sql.Open("postgres", connStr)
+	if err != nil {
+		panic(err)
+	}
 
-    repo := &repository.HRRepository{DB: db}
-    h := &handler.HRHandler{Repo: repo}
-    server.StartGRPCServer(h)
+	repo := &repository.HRRepository{DB: db}
+	h := &handler.HRHandler{Repo: repo}
+	server.StartGRPCServer(h)
 }
