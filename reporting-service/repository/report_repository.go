@@ -15,3 +15,33 @@ func (r *ReportRepository) Create(report *model.Report) error {
 		report.Title, report.Content, report.CreatedAt,
 	).Scan(&report.ID)
 }
+
+func (r *ReportRepository) GetByID(id int32) (*model.Report, error) {
+	row := r.DB.QueryRow("SELECT id, title, content, created_at FROM reports WHERE id = $1", id)
+
+	var report model.Report
+	err := row.Scan(&report.ID, &report.Title, &report.Content, &report.CreatedAt)
+	if err != nil {
+		return nil, err
+	}
+	return &report, nil
+}
+
+func (r *ReportRepository) List() ([]*model.Report, error) {
+	rows, err := r.DB.Query("SELECT id, title, content, created_at FROM reports")
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var reports []*model.Report
+	for rows.Next() {
+		var report model.Report
+		if err := rows.Scan(&report.ID, &report.Title, &report.Content, &report.CreatedAt); err != nil {
+			return nil, err
+		}
+		reports = append(reports, &report)
+	}
+
+	return reports, nil
+}

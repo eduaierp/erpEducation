@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 package reporting;
+option go_package = "./proto";
 
 service ReportingService {
     rpc GenerateReport (GenerateReportRequest) returns (ReportResponse);
